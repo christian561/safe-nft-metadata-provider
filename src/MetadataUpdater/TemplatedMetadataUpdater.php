@@ -65,13 +65,6 @@ final class TemplatedMetadataUpdater implements MetadataUpdaterInterface
             return;
         }
 
-        foreach ($this->template as $key => $value) {
-            if (is_array($value) || (isset($metadata[$key]) && is_array($metadata[$key]))) {
-                throw new RuntimeException('Deep level replacement is not supported in METADATA_TEMPLATE.');
-            }
-
-            $metadata[$key] = $this->replacePlaceholders($value, $tokenId, $assetUri);
-        }
     }
 
     private function replacePlaceholders(mixed $value, int $tokenId, string $assetUri): mixed
