@@ -78,21 +78,6 @@ final class CollectionManager
     {
         $metadata = $this->collectionFilesystemDriver->getMetadata($this->getMappedTokenId($tokenId));
 
-        foreach ($this->metadataUpdaters as $metadataUpdater) {
-            $metadataUpdater->updateMetadata(
-                $metadata,
-                $tokenId,
-                $assetUri ?? $this->urlGenerator->generate(
-                    RouteName::GET_ASSET,
-                    [
-                        'tokenId' => $tokenId,
-                        '_format' => $this->collectionFilesystemDriver->getAssetsExtension(),
-                    ],
-                    UrlGeneratorInterface::ABSOLUTE_URL,
-                ),
-            );
-        }
-
         return $metadata;
     }
 
@@ -108,13 +93,6 @@ final class CollectionManager
     {
         $hiddenMetadata = $this->collectionFilesystemDriver->getHiddenMetadata();
 
-        $hiddenMetadata['image'] = $assetUri ?? $this->urlGenerator->generate(
-            RouteName::GET_HIDDEN_ASSET,
-            [
-                '_format' => $this->collectionFilesystemDriver->getHiddenAssetExtension(),
-            ],
-            UrlGeneratorInterface::ABSOLUTE_URL,
-        );
 
         return $hiddenMetadata;
     }
