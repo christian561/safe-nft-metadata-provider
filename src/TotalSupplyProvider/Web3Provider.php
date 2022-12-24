@@ -46,7 +46,7 @@ final class Web3Provider implements TotalSupplyProviderInterface
         if (! isset($this->totalSupply)) {
             /** @var CollectionContractInterface $smartContract */
             $smartContract = $this->contract;
-            $totalSupply = $smartContract->totalSupply()->val() + 100;
+            $totalSupply = $smartContract->totalSupply()->val();
 
             if (! is_int($totalSupply)) {
                 throw new RuntimeException('Unexpected result from "totalSupply" call: "'.$totalSupply.'"');
